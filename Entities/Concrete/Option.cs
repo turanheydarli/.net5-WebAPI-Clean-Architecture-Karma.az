@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-	public class Option : IEntity
+	public class Option : BaseEntity, IEntity
 	{
-		public int Id { get; set; }
-		public int VariationOptionId { get; set; }
 		public VariationOption VariationOption { get; set; }
 		public string Name { get; set; }
 		public string Value { get; set; }

@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-	public class OrderStatus : IEntity
+	public class OrderStatus :BaseEntity, IEntity
 	{
-		public int Id { get; set; }
 
 		[ForeignKey("Order")]
 		public int OrderId { get; set; }
@@ -18,8 +17,6 @@ namespace Entities.Concrete
 		public string Name { get; set; }
 		public int Serial { get; set; }
 		public string Color { get; set; }
-		public DateTime CreatedAt { get; set; }
-		public DateTime UpdatedAt { get; set; }
 
 	}
 }

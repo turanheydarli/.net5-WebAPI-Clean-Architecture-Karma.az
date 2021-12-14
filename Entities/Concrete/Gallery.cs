@@ -7,12 +7,10 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-	public class Gallery : IEntity
+	public class Gallery : BaseEntity, IEntity
 	{
-		public int Id { get; set; }
 		public string Original { get; set; }
 		public string Thumbnail { get; set; }
-		public int ProductId { get; set; }
 		public Product Product { get; set; }
 	}
 }

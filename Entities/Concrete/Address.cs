@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-	public class Address : IEntity
+	public class Address : BaseEntity, IEntity
 	{
-		public int Id { get; set; }
 		public string Zip { get; set; }
 		public string City { get; set; }
 		public string State { get; set; }

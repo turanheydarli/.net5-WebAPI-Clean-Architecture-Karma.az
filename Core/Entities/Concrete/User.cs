@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Core.Entities.Concrete
 {
-	public class User : IEntity
+	public class User : BaseEntity, IEntity
 	{
-		public int Id { get; set; }
 		public string Name { get; set; }
 		public string ImagePath { get; set; }
 		public string Email { get; set; }
@@ -18,8 +17,6 @@ namespace Core.Entities.Concrete
 		public DateTime EmailVerifiedAt { get; set; }
 		public bool IsActive { get; set; }
 		public string RememberToken { get; set; }
-		public DateTime CreatedAt { get; set; }
-		public DateTime UpdatedAt { get; set; }
 		public int ShopId { get; set; }
 	}
 }

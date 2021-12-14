@@ -10,7 +10,6 @@ namespace Entities.Concrete
 	public class Setting : IEntity
 	{
 		public int Id { get; set; }
-		public int LogoId { get; set; }
 		public Image Logo { get; set; }
 		public string Currency { get; set; }
 		public int TaxClass { get; set; }

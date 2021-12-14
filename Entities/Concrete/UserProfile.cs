@@ -2,23 +2,24 @@
 using Core.Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-	public class UserProfile : IEntity
+	public class UserProfile : BaseEntity, IEntity
 	{
-		public int Id { get; set; }
-		public int? AvatarId { get; set; }
 		public Image Avatar { get; set; }
 		public string Bio { get; set; }
 		public string Contact { get; set; }
+
+		[ForeignKey("User")]
 		public int CustomerId { get; set; }
 		public User Customer { get; set; }
-		public DateTime CreatedAt { get; set; }
-		public DateTime UpdatedAt { get; set; }
+		public ICollection<Comment> Comments { get; set; }
+		public ICollection<Product> Products { get; set; }
 
 	}
 }
