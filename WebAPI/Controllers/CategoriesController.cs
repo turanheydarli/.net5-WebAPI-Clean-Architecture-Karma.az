@@ -1,26 +1,33 @@
 ﻿using Business.Abstract;
+using Entities.Concrete;
+using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Core.Utilities.Results;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.DependencyInjection;
+using Business.Handlers.Categories.Queries;
 
 namespace WebAPI.Controllers
 {
 	[ApiController]
 	[Route("api/[controller]")]
-	public class CategoriesController : ControllerBase
+	public class CategoriesController : BaseApiController
 	{
-		ICategoryService _categoryService;
-		public CategoriesController(ICategoryService categoryService)
+
+		[HttpGet("getall")]
+		public async Task<IActionResult> GetList()
 		{
-			_categoryService = categoryService;
+			return GetResponseOnlyResultData(await Mediator.Send(new GetCategoriesQuery()));
 		}
 
-		public async Task<IActionResult> Index()
+		[HttpGet("getbyid")]
+		public async Task<IActionResult> GetById(int id)
 		{
-			return Ok(await _categoryService.GetListAsync());
+			return GetResponseOnlyResultData(await Mediator.Send(new GetCategoryQuery { Id = id}));
 		}
+
 	}
 }

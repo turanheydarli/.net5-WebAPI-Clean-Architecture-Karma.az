@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-	public class ProductOrder : IEntity
+	public class ProductOrder : BaseEntity, IEntity
 	{
 		public Order Order { get; set; }
 		public Product Product { get; set; }
@@ -15,8 +15,6 @@ namespace Entities.Concrete
 		public string OrderQuantity { get; set; }
 		public string UnitPrice { get; set; }
 		public string SubTotal { get; set; }
-		public DateTime CreatedAt { get; set; }
-		public DateTime UpdatedAt { get; set; }
 		public DateTime DeletedAt { get; set; }
 	}
 }

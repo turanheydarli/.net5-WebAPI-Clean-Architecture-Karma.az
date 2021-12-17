@@ -15,7 +15,10 @@ namespace DataAccess.Concrete.Configurations
 		public override void Configure(EntityTypeBuilder<UserProfile> builder)
 		{
 			builder.Property(u => u.Bio).HasMaxLength((int)MaxLenghtSize.Bio).IsRequired();
-			builder.Property(u => u.Customer.Name).IsRequired();
+
+			builder.Property(u => u.Customer.Name).IsRequired().IsRequired();
+			builder.HasIndex(u => u.Customer.Name).IsUnique();
+
 			builder.Property(u => u.Customer.Email).IsRequired();
 
 			base.Configure(builder);

@@ -12,5 +12,8 @@ namespace Entities.Common
 		Description = 1500,
 		Bio = 1000,
 		Name = 50,
+		MetaTitle = 160,
+		MetaDescription = 160,
+		MetaKeyword = 30,
 	}
 }

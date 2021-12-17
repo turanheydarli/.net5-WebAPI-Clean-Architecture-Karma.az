@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-	public class EfCategoryDal : EfEntityRepositoryBase<Category, ProjectDbContext>, ICategoryDal
+	public class EfCategoryDal : EfEntityRepositoryBase<Category, MsDbContext>, ICategoryDal
 	{
-		public EfCategoryDal(ProjectDbContext context):base(context)
+		public EfCategoryDal(MsDbContext context):base(context)
 		{
 
 		}

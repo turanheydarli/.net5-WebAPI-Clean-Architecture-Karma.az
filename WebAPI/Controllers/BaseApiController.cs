@@ -6,19 +6,12 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace WebAPI.Controllers
 {
-    /// <summary>
-    /// Base controller
-    /// </summary>
-    [Authorize]
     [Route("[controller]")]
     [ApiController]
     public class BaseApiController : Controller
     {
         private IMediator _mediator;
 
-        /// <summary>
-        /// It is for getting the Mediator instance creation process from the base controller.
-        /// </summary>
         protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
 
         [ApiExplorerSettings(IgnoreApi = true)]
@@ -164,7 +157,7 @@ namespace WebAPI.Controllers
                 Data = data
             });
         }
-
+        
         [NonAction]
         protected IActionResult NotFound<T>(ApiResult<T> data)
         {
