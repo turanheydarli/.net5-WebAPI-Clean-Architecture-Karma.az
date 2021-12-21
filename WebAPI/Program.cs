@@ -1,3 +1,4 @@
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -18,9 +19,12 @@ namespace WebAPI
 
 		public static IHostBuilder CreateHostBuilder(string[] args) =>
 			Host.CreateDefaultBuilder(args)
-				.ConfigureWebHostDefaults(webBuilder =>
+				.UseServiceProviderFactory(new AutofacServiceProviderFactory())
+				.ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); })
+				.ConfigureLogging(logging =>
 				{
-					webBuilder.UseStartup<Startup>();
+					logging.ClearProviders();
+					logging.SetMinimumLevel(LogLevel.Trace);
 				});
 	}
 }

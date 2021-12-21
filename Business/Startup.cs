@@ -12,6 +12,9 @@ using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Autofac;
+using Microsoft.IdentityModel.Protocols;
+using Business.DependencyResolvers;
 
 namespace Business
 {
@@ -29,7 +32,11 @@ namespace Business
 
         public virtual void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddMediatR(typeof(BusinessStartup).GetTypeInfo().Assembly);
+        }
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterModule(new AutofacBusinessModule(new ConfigurationManager(Configuration, HostEnvironment)));
         }
 
     }

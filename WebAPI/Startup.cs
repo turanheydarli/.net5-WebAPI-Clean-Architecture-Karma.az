@@ -22,20 +22,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Business.Services.File;
+using Business;
+using System.Reflection;
+using Autofac;
+using Microsoft.IdentityModel.Protocols;
 
 namespace WebAPI
 {
-	public class Startup
+	public class Startup : BusinessStartup
 	{
-		public Startup(IConfiguration configuration)
+		public Startup(IConfiguration configuration, IHostEnvironment hostEnvironment)
+		   : base(configuration, hostEnvironment)
 		{
-			Configuration = configuration;
 		}
 
-		public IConfiguration Configuration { get; }
 
 		// This method gets called by the runtime. Use this method to add services to the container.
-		public void ConfigureServices(IServiceCollection services)
+		public override void ConfigureServices(IServiceCollection services)
 		{
 
 			services.AddSingleton<ICategoryService, CategoryManager>();
@@ -43,10 +47,12 @@ namespace WebAPI
 
 			services.AddSingleton<MsDbContext, MsDbContext>();
 
+			services.AddSingleton<IFileService, FileService>();
+			services.AddSingleton<IImageDal, EfImageDal>();
+
 			services.AddAutoMapper();
 
-			var assembly = AppDomain.CurrentDomain.Load("Business");
-			services.AddMediatR(assembly);
+
 
 			services.AddControllers()
 			   .AddJsonOptions(options =>
@@ -54,6 +60,8 @@ namespace WebAPI
 				   options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 				   options.JsonSerializerOptions.IgnoreNullValues = true;
 			   });
+
+			services.AddMediatR(typeof(BusinessStartup).GetTypeInfo().Assembly);
 
 
 			services.AddCors(options =>
@@ -81,8 +89,10 @@ namespace WebAPI
 					};
 				});
 
-
+			base.ConfigureServices(services);
 		}
+
+
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
